@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    crm-inventory:
+        build:
+            context: .
+            dockerfile: Dockerfile
+
+        volumes:
+            - .:/app:cached
+        
+        command: sleep infinity
