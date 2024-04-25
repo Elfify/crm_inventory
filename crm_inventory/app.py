@@ -9,7 +9,6 @@ app = FastAPI()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("creating DB")
     initialize_db()
     yield
 
