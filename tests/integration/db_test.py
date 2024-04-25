@@ -1,4 +1,5 @@
 from sqlalchemy_utils import database_exists
+
 from crm_inventory.config.config import DATABASE_URL
 
 
