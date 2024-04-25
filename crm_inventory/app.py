@@ -1,4 +1,4 @@
-from contextlib import asynccontextmanager  
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
@@ -12,6 +12,7 @@ async def lifespan(app: FastAPI):
     print("creating DB")
     initialize_db()
     yield
+
 
 @app.get("/health")
 def health():
