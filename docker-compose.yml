@@ -2,12 +2,42 @@ version: "3"
 
 services:
     crm-inventory:
+        networks:
+            - local
         build:
             context: .
             dockerfile: Dockerfile
+        container_name: "crm_inventory"
+        depends_on:
+            postgres-local:
+                condition: service_healthy
         ports:
             - "8000:8000"
         volumes:
             - .:/app:cached
         
         command: uvicorn crm_inventory.app:app --host 0.0.0.0 --port 8000 --reload
+
+    postgres-local:
+        networks:
+            - local
+        image: postgres:14
+        container_name: local-postgres
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_PASSWORD: postgres
+            PGUSER: postgres
+            POSTGRES_DB: crm_inventory
+        volumes:
+            - postgres_data:/var/lib/postgresql/data  # Persist data
+        healthcheck:
+            test: "pg_isready -q"
+        command: ["postgres", "-c", "log_statement=all"]
+    
+networks:
+    local:
+        driver: bridge
+
+volumes:
+  postgres_data:
