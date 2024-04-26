@@ -1,6 +1,6 @@
 from sqlalchemy_utils import create_database, database_exists
 
-DATABASE_URL = "postgresql://postgres:postgres@postgres-local:5432/crm_inventory"
+DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/crm_inventory"
 
 
 def initialize_db():
