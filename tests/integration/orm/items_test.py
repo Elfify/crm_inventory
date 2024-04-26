@@ -1,10 +1,8 @@
-from sqlalchemy import create_engine, MetaData
-from crm_inventory.config.config import DATABASE_URL
+from sqlalchemy import MetaData
 
 
-def test__items_table_exists():
-    engine = create_engine("postgresql://postgres:postgres@localhost:5432/crm_inventory")
+def test__items_table_exists(db_engine):
     metadata = MetaData()
-    metadata.reflect(bind=engine)
+    metadata.reflect(bind=db_engine)
     
     assert "items" in metadata.tables.keys()
