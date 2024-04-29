@@ -1,8 +1,8 @@
-"""Create inventories and items table
+"""Create inventory and item tables
 
-Revision ID: edd0869972af
+Revision ID: 0687dbdc4a78
 Revises: 
-Create Date: 2024-04-26 11:21:18.956850
+Create Date: 2024-04-28 17:47:13.379643
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'edd0869972af'
+revision: str = '0687dbdc4a78'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -31,7 +31,6 @@ def upgrade() -> None:
     )
     op.create_table('items',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('inventory_id', sa.Integer(), nullable=False),
     sa.Column('SKU', sa.String(), nullable=False),
     sa.Column('name', sa.String(length=75), nullable=False),
     sa.Column('category', sa.String(), nullable=True),
@@ -43,9 +42,7 @@ def upgrade() -> None:
     sa.Column('image_url', sa.String(), nullable=True),
     sa.Column('created_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
-    sa.ForeignKeyConstraint(['inventory_id'], ['inventories.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('SKU', 'inventory_id', name='_inventory_sku_uc')
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 

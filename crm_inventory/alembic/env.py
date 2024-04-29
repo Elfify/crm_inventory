@@ -4,6 +4,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+from crm_inventory.config.config import DATABASE_URL
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -18,15 +19,19 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from crm_inventory.orm.base import Base
-from crm_inventory.orm.item import Item
-from crm_inventory.orm.inventory import Inventory
-target_metadata = Base.metadata
+# from crm_inventory.orm.base import Base
+# from crm_inventory.orm.item import Item
+# from crm_inventory.orm.inventory import Inventory
+# target_metadata = Base.metadata
+target_metadata = None
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+# Dynamically set database_url based on environment
+config.set_main_option('sqlalchemy.url', DATABASE_URL)
 
 
 def run_migrations_offline() -> None:
@@ -42,6 +47,7 @@ def run_migrations_offline() -> None:
 
     """
     url = config.get_main_option("sqlalchemy.url")
+    print(url)
     context.configure(
         url=url,
         target_metadata=target_metadata,

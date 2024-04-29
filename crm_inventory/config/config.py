@@ -1,13 +1,6 @@
-from sqlalchemy_utils import create_database, database_exists
-
-DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/crm_inventory"
+import os
 
 
-def initialize_db():
-    print("Initializing database...")
+env = os.getenv('APP_ENV', 'test')
 
-    if database_exists(DATABASE_URL):
-        print("Database exists!")
-    else:
-        create_database(DATABASE_URL)
-        print("Database created!")
+DATABASE_URL = f"postgresql://postgres:postgres@postgres-local:5432/crm_inventory-{env}"

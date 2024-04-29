@@ -9,7 +9,7 @@ class Item(Base, TimestampMixin):
     __tablename__ = "items"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    inventory_id: Mapped[int] = mapped_column(Integer, ForeignKey('inventories.id'))
+    # inventory_id: Mapped[int] = mapped_column(Integer, ForeignKey('inventories.id'))
     SKU: Mapped[str]
     name: Mapped[str] = mapped_column(String(length=75))
     category: Mapped[str] = mapped_column(String, nullable=True)
@@ -20,5 +20,5 @@ class Item(Base, TimestampMixin):
     stock_item: Mapped[bool]
     image_url: Mapped[str] = mapped_column(String, nullable=True)
 
-    inventory: Mapped[int] = relationship("Inventory", back_populates="items")
-    __table_args__ = (UniqueConstraint('SKU', 'inventory_id', name='_inventory_sku_uc'),)
+    # inventory: Mapped["Inventory"] = relationship("Inventory", back_populates="items")
+    # __table_args__ = (UniqueConstraint('SKU', 'inventory_id', name='_inventory_sku_uc'),)
