@@ -14,9 +14,6 @@ class BaseResponse(BaseModel, Generic[ModelType]):
     error: Optional[str] = None
     data: Optional[ModelType] = None
 
-    class Config:
-        exclude_none = True
-
 
 class InventoryResponse(BaseResponse[Inventory]):
     pass
