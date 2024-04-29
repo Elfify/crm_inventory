@@ -12,4 +12,4 @@ class Inventory(Base, TimestampMixin):
     user_id: Mapped[int]
     name: Mapped[str] = mapped_column(String(length=75))
     storage_location: Mapped[str]
-    items: Mapped[list] = relationship("Item", back_populates="inventory")
+    # items: Mapped[list] = relationship("Item", back_populates="inventory")
