@@ -10,5 +10,4 @@ class Inventory(BaseModel):
     storage_location: str = Field(max_length=75)
 
     class Config:
-        exclude_none = True
         from_attributes = True
