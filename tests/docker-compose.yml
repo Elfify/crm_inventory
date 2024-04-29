@@ -5,14 +5,14 @@ services:
         networks:
             - local
         build:
-            context: .
+            context: ../
             dockerfile: Dockerfile
-        container_name: "crm_inventory-prod"
+        container_name: "crm_inventory-test"
         depends_on:
             postgres-local:
                 condition: service_healthy
         environment:
-            APP_ENV: prod
+            APP_ENV: test
         ports:
             - "8000:8000"
         volumes:
@@ -24,7 +24,7 @@ services:
         networks:
             - local
         image: postgres:14
-        container_name: postgres-prod
+        container_name: postgres-test
         ports:
             - "5432:5432"
         environment:
