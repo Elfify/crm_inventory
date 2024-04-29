@@ -16,7 +16,7 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - .:/app:cached
+            - ../:/app:cached
         
         command: uvicorn crm_inventory.app:app --host 0.0.0.0 --port 8000 --reload
 
